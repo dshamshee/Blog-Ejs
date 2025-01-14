@@ -1,0 +1,40 @@
+<div
+    class="navbar text-white bg-base-100 flex justify-between items-center md:px-10 py-2 fixed top-0 w-full left-0 z-50 shadow ">
+    <div class="">
+        <i class='bx bxl-blogger text-3xl hidden'></i>
+        <a class="btn btn-ghost md:text-xl text-lg" href="/"><strong><i>B</i>log</strong></a>
+    </div>
+
+    <!-- Center Section -->
+    <div class="center md:text-2xl flex md:gap-48 gap-10">
+        <a href="/" class=""><i class='bx hover:text-blue-500 bxs-home'></i></a>
+        <a href="/post/create/<%= user._id %>" class=""><i class='bx hover:text-blue-500 bxs-plus-square'></i></a>
+        <a href="#" class=""><i class='bx hover:text-blue-500 bx-search'></i></a>
+
+    </div>
+
+
+    <div class="flex items-center gap-2">
+        <!-- <div class="form-control">
+        <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto md:block hidden" />
+      </div> -->
+        <!-- <a class="text-red-500 hover:text-red-700 font-bold mr-3" href="#">LogOut</a> -->
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                    <img alt="Tailwind CSS Navbar component" src="/images/uploads/<%= user.profile_picture %>" />
+                </div>
+            </div>
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                <li>
+                    <a class="justify-between">
+                        Profile
+                        <span class="badge">New</span>
+                    </a>
+                </li>
+                <li><a>Settings</a></li>
+                <li><a href="/user/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

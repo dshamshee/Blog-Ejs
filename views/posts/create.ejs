@@ -1,0 +1,49 @@
+<% layout('./boilerplate') -%>
+    <div class="text-white w-full h-auto flex justify-center py-10 mt-10">
+
+        <div class="body w-10/12 h-auto md:px-10 px-1 py-5 flex justify-center">
+
+            <form class="w-10/12" action="/post/create" method="post" enctype="multipart/form-data">
+                <!-- Title -->
+                <label for="Title" class="text-2xl font-bold">Title</label><br>
+                <input type="text" name="title" id="titleInput" placeholder="Title" class="input input-bordered input-primary input-md w-full max-w-xs" maxlength="22" required />
+                <p id="titleCounter" class="text-sm text-gray-400">22 characters remaining</p>
+                <br><br>
+
+                <!-- Caption -->
+                <label for="Content" class="text-2xl font-bold">Caption</label><br>
+                <textarea id="captionInput" name="body" placeholder="Type here" class="input input-bordered input-primary input-md w-full md:max-w-full sm:max-w-xs h-16 resize-none" maxlength="50" required></textarea>
+                <p id="captionCounter" class="text-sm text-gray-400">50 characters remaining</p>
+                <br>
+
+                <input type="file" name="image" class="" required /><br><br>
+                
+                  
+
+                <!-- Submit Button -->
+                <input type="submit" value="Post" class="text-2xl text-white btn btn-primary btn-md w-48">
+            </form>
+
+
+        </div>
+    </div>
+
+
+    <script>
+        const titleInput = document.getElementById('titleInput');
+        const captionInput = document.getElementById('captionInput');
+        const titleCounter = document.getElementById('titleCounter');
+        const captionCounter = document.getElementById('captionCounter');
+
+        // Update title character count
+        titleInput.addEventListener('input', () => {
+            const remaining = 22 - titleInput.value.length;
+            titleCounter.textContent = `${remaining} characters remaining`;
+        });
+
+        // Update caption character count
+        captionInput.addEventListener('input', () => {
+            const remaining = 50 - captionInput.value.length;
+            captionCounter.textContent = `${remaining} characters remaining`;
+        });
+    </script>

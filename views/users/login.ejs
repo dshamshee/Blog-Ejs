@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shorcut icon" type="x-icon" href="./images/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="/stylesheets/output.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body class="bg-[#000000] w-screen h-screen">
+
+    <div class="text-white w-full h-full flex flex-col justify-center items-center py-10">
+        <h1 class="text-3xl font-bold text-center text-blue-600 mb-5 underline">Login to Blog</h1>
+        <form class="w-72" action="/user/login" method="post">
+
+            <label class="form-control w-full max-w-xs">
+                <div class="label">
+                    <span class="label-text">Email<span class="text-red-700 font-bold">*</span></span>
+                </div>
+                <input type="email" name="email" placeholder="Email ID" class="input input-bordered input-primary w-full max-w-xs" required />
+            </label>
+
+            <label class="form-control w-full max-w-xs">
+                <div class="label">
+                    <span class="label-text">Password<span class="text-red-700 font-bold">*</span></span>
+                </div>
+                <div class="relative">
+                    <input id="password" name="password" type="password" placeholder="Password" class="input input-bordered input-primary w-full max-w-xs" required />
+                    <button type="button" onclick="togglePassword()" class="absolute right-3 top-3 text-xl text-gray-500">
+                        <i id="toggleIcon" class='bx bx-hide'></i>
+                    </button>
+                </div>
+            </label>
+
+            <br>
+
+            <input type="submit" value="Login" class="btn btn-accent btn-sm w-full font-bold text-xl">
+        </form>
+        <p class="mt-5">Not registered yet? <a class="underline" href="/user/register">SignUp Now</a> </p>
+    </div>
+
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggleIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.replace('bx-hide', 'bx-show');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.replace('bx-show', 'bx-hide');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
