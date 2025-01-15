@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userModel = require('../models/User');
+const postModel = require('../models/Post');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const isLoggedin = require('../middlewares/isLoggedin');
@@ -70,6 +71,28 @@ router.post('/login',async function (req, res) {
 router.get('/logout', function(req, res){
     res.cookie("token", "");
     res.redirect('/');
+})
+
+
+router.get('/profile', isLoggedin,async function(req, res){
+    const user = req.user;
+    const posts = await postModel.find({ author: user._id });
+    res.render('users/profile', {user, posts});
+})
+
+
+router.post('/bio', isLoggedin, async function(req, res){
+    const { bio } = req.body;
+    req.user.bio = bio;
+    await req.user.save();
+    res.redirect('/user/profile');
+})
+
+
+router.post('/uploadProfilePicture', isLoggedin, upload.single('profile_picture'), async function(req, res){
+    req.user.profile_picture = req.file.filename;
+    await req.user.save();
+    res.redirect('/user/profile');
 })
 
 module.exports = router;
