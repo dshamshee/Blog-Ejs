@@ -2221,6 +2221,10 @@ html {
   margin-right: 0.75rem;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -2239,10 +2243,6 @@ html {
 
 .mt-5 {
   margin-top: 1.25rem;
-}
-
-.mt-1 {
-  margin-top: 0.25rem;
 }
 
 .flex {
@@ -2297,10 +2297,6 @@ html {
   min-height: 100vh;
 }
 
-.min-h-\[300px\] {
-  min-height: 300px;
-}
-
 .w-10 {
   width: 2.5rem;
 }
@@ -2347,10 +2343,6 @@ html {
 
 .max-w-xs {
   max-width: 20rem;
-}
-
-.max-w-48 {
-  max-width: 12rem;
 }
 
 .flex-grow {
@@ -2452,16 +2444,6 @@ html {
   background-color: transparent;
 }
 
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
-}
-
-.bg-zinc-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(63 63 70 / var(--tw-bg-opacity, 1));
-}
-
 .bg-zinc-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(24 24 27 / var(--tw-bg-opacity, 1));
@@ -2486,21 +2468,9 @@ html {
   --tw-gradient-to: #ec4899 var(--tw-gradient-to-position);
 }
 
-.bg-cover {
-  background-size: cover;
-}
-
 .bg-clip-text {
   -webkit-background-clip: text;
           background-clip: text;
-}
-
-.bg-center {
-  background-position: center;
-}
-
-.bg-no-repeat {
-  background-repeat: no-repeat;
 }
 
 .object-cover {
@@ -2716,13 +2686,13 @@ html {
     line-height: 2rem;
   }
 
-  .md\:text-xl {
-    font-size: 1.25rem;
+  .md\:text-lg {
+    font-size: 1.125rem;
     line-height: 1.75rem;
   }
 
-  .md\:text-lg {
-    font-size: 1.125rem;
+  .md\:text-xl {
+    font-size: 1.25rem;
     line-height: 1.75rem;
   }
 }
