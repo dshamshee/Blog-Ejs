@@ -1,0 +1,22 @@
+<% layout('./boilerplate') -%>
+    <!-- Requres py-10 & mt-10 becaouse navbar is fixed -->
+    <div class="container text-white w-full flex justify-center h-auto mt-10 py-10 md:px-10">
+        <div class="md:w-[70%] p-5 text-pretty">
+
+            <div class="title md:text-center text-3xl font-bold underline">
+            <%= post.title %>
+            </div>
+
+            <div class="caption md:text-center mt-3 text-xl font-semibold">
+            <%= post.caption %>
+            </div>
+
+            <div class="image">
+                <img class="mt-2 md:ml-[30%] w-[400px] h-[400px] object-cover" src="/images/blogUploads/<%= post.image %>" alt="image">
+            </div>
+
+            <div class="body mt-5 ">
+                <%- post.body %>
+            </div>
+        </div>
+    </div>

@@ -6,44 +6,58 @@
             <form class="w-10/12" action="/post/create" method="post" enctype="multipart/form-data">
                 <!-- Title -->
                 <label for="Title" class="text-2xl font-bold">Title</label><br>
-                <input type="text" name="title" id="titleInput" placeholder="Title" class="input input-bordered input-primary input-md w-full max-w-xs" maxlength="22" required />
+                <input type="text" name="title" id="titleInput" placeholder="Title"
+                    class="input input-bordered input-primary input-md w-full max-w-xs" maxlength="22" required />
                 <p id="titleCounter" class="text-sm text-gray-400">22 characters remaining</p>
-                <br><br>
-
-                <!-- Caption -->
-                <label for="Content" class="text-2xl font-bold">Caption</label><br>
-                <textarea id="captionInput" name="body" placeholder="Type here" class="input input-bordered input-primary input-md w-full md:max-w-full sm:max-w-xs h-16 resize-none" maxlength="50" required></textarea>
-                <p id="captionCounter" class="text-sm text-gray-400">50 characters remaining</p>
                 <br>
 
+                <!-- Title -->
+                <label for="Caption" class="text-2xl font-bold">Caption</label><br>
+                <input type="text" name="caption" id="captionInput" placeholder="Type Here.."
+                    class="input input-bordered input-primary input-md w-full max-w-xs" maxlength="40" required />
+                <p id="captionCounter" class="text-sm text-gray-400">40 characters remaining</p>
+                <br><br>
+
+                <!-- Content -->
+                <label for="Content" class="text-2xl font-bold">Content</label><br>
+                <textarea id="body" name="body" placeholder="Type here"></textarea>
+                <br>
+
+                <!-- File Upload -->
                 <input type="file" name="image" class="" required /><br><br>
-                
-                  
 
                 <!-- Submit Button -->
                 <input type="submit" value="Post" class="text-2xl text-white btn btn-primary btn-md w-48">
             </form>
-
-
         </div>
     </div>
 
+    <!-- TinyMCE Script -->
+    <script src="https://cdn.tiny.cloud/1/n95pdpprtkwvpog9muoeq8qhsl4swzebeouevhercw0khqtn/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
 
     <script>
-        const titleInput = document.getElementById('titleInput');
-        const captionInput = document.getElementById('captionInput');
-        const titleCounter = document.getElementById('titleCounter');
-        const captionCounter = document.getElementById('captionCounter');
+        tinymce.init({
+            selector: '#body', // Matches the id of the textarea
+            plugins: 'advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table help wordcount',
+            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            height: 300, // Set the height of the editor
+            extended_valid_elements: 'p[style],div[style]',
+            valid_elements: '*[*]'
+        });
 
-        // Update title character count
+        // Title Counter
+        const titleInput = document.getElementById('titleInput');
+        const titleCounter = document.getElementById('titleCounter');
         titleInput.addEventListener('input', () => {
             const remaining = 22 - titleInput.value.length;
             titleCounter.textContent = `${remaining} characters remaining`;
         });
-
-        // Update caption character count
+        // Caption Counter
+        const captionInput = document.getElementById('captionInput');
+        const captionCounter = document.getElementById('captionCounter');
         captionInput.addEventListener('input', () => {
-            const remaining = 50 - captionInput.value.length;
+            const remaining = 40 - captionInput.value.length;
             captionCounter.textContent = `${remaining} characters remaining`;
         });
     </script>

@@ -5,11 +5,13 @@
         <!-- Profile Section -->
         <div class=" flex flex-col items-center bg-zinc-900 rounded-lg shadow-lg p-8">
             <!-- Profile Picture -->
-            <img class="w-32 h-32 rounded-full object-cover border-4 border-blue-600" src="/images/uploads/<%= user.profile_picture %>" alt="Profile Picture">
+            <img class="w-32 h-32 rounded-full object-cover border-4 border-blue-600"
+                src="/images/uploads/<%= user.profile_picture %>" alt="Profile Picture">
             <!-- Edit Icon and Hidden File Upload -->
             <form action="/user/uploadProfilePicture" method="POST" enctype="multipart/form-data" id="uploadForm">
                 <input type="file" name="profile_picture" id="fileInput" class="hidden" onchange="submitForm()">
-                <a href="javascript:void(0)" onclick="triggerFileInput()"><i class="bx bxs-edit-alt text-2xl mt-1 cursor-pointer"></i></a>
+                <a href="javascript:void(0)" onclick="triggerFileInput()"><i
+                        class="bx bxs-edit-alt text-2xl mt-1 cursor-pointer"></i></a>
             </form>
 
             <!-- User Info -->
@@ -18,7 +20,7 @@
             </h1>
             <p class="text-gray-500 text-lg">@<%= user.username %>
             </p>
-            <p class="mt-2 text-gray-600 text-center">
+            <p id="bio" class="mt-2 text-gray-600 text-center">
                 <% if(user.bio==="Nothing" ){ %>
                     <form class="w-full flex justify-center gap-5" action="/user/bio" method="post">
                         <input type="text" name="bio" placeholder="Write your bio..."
@@ -58,29 +60,58 @@
             <% if(posts.length> 0){ %>
                 <% posts.forEach(function(post){ %>
                     <!-- Post Card 1 -->
-                    <div class="card card-side bg-base-100 md:w-[420px] md:h-48 h-48 shadow-xl">
-                        <figure>
-                            <img class="h-48 w-48" src="/images/blogUploads/<%= post.image %>" alt="Post Image" />
-                        </figure>
-                        <div class="card-body">
-                            <h2 class="card-title text-lg">
-                                <%= post.title %>
-                            </h2>
-                            <p class="text-sm">
-                                <%= post.body %>
-                            </p>
-                            <div class="card-actions justify-around">
-                                <a onclick="togglelike()" href="#"><i id="likeicon" class='bx bx-like text-lg'></i></a>
-                                <a href="#"><i class='bx bxs-comment-detail text-lg'></i></a>
-                                <!-- <button class="btn btn-primary btn-xs w-20 font-bold">View</button> -->
+                    <div class="">
+                        <div class="card card-side bg-base-100 md:w-[420px] md:h-48 h-48 shadow-xl">
+                            <figure>
+                                <img class="h-48 md:w-40 w-32" src="/images/blogUploads/<%= post.image %>"
+                                    alt="Post Image" />
+                            </figure>
+                            <div class="card-body">
+                                <h2 class="card-title text-lg">
+                                    <%= post.title %>
+                                </h2>
+                                <p class="text-sm">
+                                    <%= post.caption %>
+                                </p>
+
+                                <!-- Action Buttons -->
+                                <div class="card-actions justify-around">
+
+                                    <!-- Like Button -->
+                                    <a class="" href="/post/profile/like/<%= post._id%>">
+                                        <% if(post.likes.indexOf(user._id)===-1){ %>
+                                            <%= post.likes.length%> <i id="likeIcon_<%= post._id %>"
+                                                    class="bx bx-like text-lg"></i>
+                                                <% }else{ %>
+                                                    <%= post.likes.length%> <i id="likeIcon_<%= post._id %>"
+                                                            class="bx bxs-like text-lg"></i>
+                                                        <% } %>
+                                    </a>
+
+                                    <!-- Comment Button -->
+                                    <a href="#"><i class='bx bxs-comment-detail text-lg'></i></a>
+
+                                    <!-- View Button -->
+                                    <!-- <button class="btn btn-primary btn-xs w-20 font-bold">View</button> -->
+                                    <a href="/post/view/<%= post._id %>"><i class='bx bx-show-alt'></i></a>
+
+                                    <!-- Delete Button -->
+                                    <a href="/post/delete/<%= post._id %>"><i class='bx bxs-box'></i></a>
+                                </div>
                             </div>
                         </div>
+                        <!-- Display Post Uploaded Date -->
+                        <h1 class="text-gray-600">
+                            <%= post.createdAt.toLocaleDateString('en-GB') %>
+                        </h1>
                     </div>
                     <% }) %>
                         <% }else{ %>
                             <!-- Wargin Message -->
                             <div class="w-full h-[75vh] ">
-                                <h1 class="text-xs md:text-lg font-bold antialiased tracking-wide leading-relaxed text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-[#D946EF] to-pink-500">Nice collection of... nothing.</h1>
+                                <h1
+                                    class="text-xs md:text-lg font-bold antialiased tracking-wide leading-relaxed text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-[#D946EF] to-pink-500">
+                                    Nice collection of... nothing.</h1>
                             </div>
                             <% } %>
         </div>
@@ -100,11 +131,30 @@
 
         // Trigger the hidden file input when the edit icon is clicked
         function triggerFileInput() {
-        document.getElementById('fileInput').click();
+            document.getElementById('fileInput').click();
         }
 
         // Automatically submit the form once a file is selected
         function submitForm() {
-        document.getElementById('uploadForm').submit();
+            document.getElementById('uploadForm').submit();
         }
+
+        // Function to replace the bio text with a form input on double-click
+        document.getElementById('bio').addEventListener('dblclick', function () {
+            const bioElement = document.getElementById('bio');
+            const currentBio = bioElement.textContent.trim();
+
+            // Create a form dynamically
+            const formHtml = `
+            <form class="w-full flex justify-center gap-5" action="/user/bio" method="post">
+                <input type="text" name="bio" value="${currentBio !== 'Nothing' ? currentBio : ''}" 
+                    placeholder="Write your bio..."
+                    class="input input-sm bg-transparent input-bordered input-accent w-full max-w-xs" />
+                <input type="submit" value="Save" class="btn btn-accent btn-sm">
+            </form>
+        `;
+
+            // Replace the bio content with the form
+            bioElement.innerHTML = formHtml;
+        });
     </script>

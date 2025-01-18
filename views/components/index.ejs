@@ -1,49 +1,55 @@
 <% layout('./boilerplate') -%>
 
-<div class="text-white w-full h-auto flex justify-center py-10 mt-10">
-    <div class="body h-auto md:px-10 px-1 py-5 grid md:grid-cols-3 grid-cols-1 gap-5">
+    <div class="text-white w-full h-auto flex justify-center py-10 mt-10">
+        <div class="body h-auto md:px-10 px-1 py-5 grid md:grid-cols-3 grid-cols-1 gap-5">
 
-        <% allPosts.forEach(function(post) { %>
+            <% allPosts.forEach(function(post) { %>
 
-        <!-- Post Card -->
-        <div class="card card-side bg-base-100 md:w-[420px] md:h-48 h-52 shadow-xl">
-            <figure>
-                <img class="md:h-48 h-52 w-48" src="/images/blogUploads/<%= post.image %>" alt="Blog" />
-            </figure>
-            <div class="card-body">
-                <p><%= post.username %></p>
-                <h2 class="card-title text-lg"><%= post.title %></h2>
-                <p class="text-sm"><%= post.body %></p>
+                <!-- Post Card -->
+                <div class="card card-side bg-base-100 md:w-[420px] md:h-48 h-52 shadow-xl">
+                    <figure>
+                        <img class="md:h-48 h-52 md:w-40 w-32" src="/images/blogUploads/<%= post.image %>" alt="Blog" />
+                    </figure>
+                    <div class="card-body">
+                        <p>
+                            <%= post.username %>
+                        </p>
+                        <h2 class="card-title text-lg">
+                            <%= post.title %>
+                        </h2>
+                        <p class="text-sm">
+                            <%= post.caption %>
+                        </p>
 
-                <!-- Like Button Section -->
-                <div class="card-actions justify-around">
-                    <!-- Like Button -->
-                    <a href="javascript:void(0)" id="likeButton_<%= post._id %>" onclick="toggleLike('<%= post._id %>')">
-                        <i id="likeIcon_<%= post._id %>" class="bx bx-like text-lg"></i>
-                    </a>
-                    <!-- Comment Button -->
-                    <a href="#"><i class="bx bxs-comment-detail text-lg"></i></a>
+                        <!-- Button Section -->
+                        <div class="card-actions justify-around">
+
+                            <!-- Like Button -->
+                            <a class="" href="/post/like/<%= post._id%>">
+                                <% if(post.likes.indexOf(user._id)===-1){ %>
+                                    <%= post.likes.length%> <i id="likeIcon_<%= post._id %>"
+                                            class="bx bx-like text-lg"></i>
+                                        <% }else{ %>
+                                            <%= post.likes.length%> <i id="likeIcon_<%= post._id %>"
+                                                    class="bx bxs-like text-lg"></i>
+                                                <% } %>
+                            </a>
+
+                            <!-- Comment Button -->
+                                    <a href="#"><i class='bx bxs-comment-detail text-lg'></i></a>
+
+
+                            <!-- Viwe Button -->
+                            <!-- <a href="/post/view/<%= post._id %>"><button class="btn btn-primary btn-xs w-20 font-bold">View</button></a> -->
+                            <a href="/post/view/<%= post._id %>"><i class='bx bx-show-alt' ></i></a>
+
+                            <!-- Delete Button -->
+                            <!-- <a href="#"><i class='bx bxs-box' ></i></a> -->
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <% }) %>
+
         </div>
-
-        <% }) %>
-
     </div>
-</div>
-
-<!-- JavaScript Code to Handle Like Button Toggle for Each Post -->
-<script>
-    // Function to toggle the like button for each post separately
-    function toggleLike(postId) {
-        const likeIcon = document.getElementById(`likeIcon_${postId}`);
-        
-        if (likeIcon.classList.contains('bx-like')) {
-            likeIcon.classList.replace('bx-like', 'bxs-like'); // Change to filled like icon
-            console.log(`Post ${postId} liked!`);
-        } else {
-            likeIcon.classList.replace('bxs-like', 'bx-like'); // Change back to outlined like icon
-            console.log(`Post ${postId} unliked!`);
-        }
-    }
-</script>
