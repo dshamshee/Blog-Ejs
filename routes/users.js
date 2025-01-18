@@ -95,4 +95,19 @@ router.post('/uploadProfilePicture', isLoggedin, upload.single('profile_picture'
     res.redirect('/user/profile');
 })
 
+
+router.post('/find',isLoggedin, async function(req, res){
+    const { searchInput } = req.body;
+    const user = req.user;
+    const SearchedUsers = await userModel.find({ username: { $regex: searchInput, $options: 'i' } });
+    res.render('users/searchedUsers', { SearchedUsers, user });
+});
+
+
+router.get('/profile/:id',async function(req, res){
+    const user = await userModel.findOne({_id: req.params.id});
+    const posts = await postModel.find({ author: user._id });
+    res.render('users/profile', {user, posts});
+})
+
 module.exports = router;

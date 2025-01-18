@@ -9,15 +9,28 @@
     <div class="center md:text-2xl flex md:gap-48 gap-10">
         <a href="/" class=""><i class='bx hover:text-blue-500 bxs-home'></i></a>
         <a href="/post/create/<%= user._id %>" class=""><i class='bx hover:text-blue-500 bxs-plus-square'></i></a>
-        <a href="#" class=""><i class='bx hover:text-blue-500 bx-search'></i></a>
+        <!-- <a href="#" class=""><i class='bx hover:text-blue-500 bx-search'></i></a> -->
+
+        <!-- Open the modal using ID.showModal() method -->
+        <button class="" onclick="my_modal_1.showModal()"><i class='bx text-lg hover:text-blue-500 bx-search'></i></button>
+        <dialog id="my_modal_1" class="modal modal-top">
+            <div class="modal-box">
+                <h3 class="text-lg font-bold">Ready to Search</h3>
+                <div class="modal-action">
+                    <form action="/user/find" method="post" class="w-full">
+                        <input type="text" name="searchInput" placeholder="Search" class="input input-bordered w-full mb-5" />
+                        <input class="btn" type="submit" value="Search">
+                    </form>
+                </div>
+            </div>
+        </dialog>
+        
 
     </div>
 
 
     <div class="flex items-center gap-2">
-        <!-- <div class="form-control">
-        <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto md:block hidden" />
-      </div> -->
+
         <!-- <a class="text-red-500 hover:text-red-700 font-bold mr-3" href="#">LogOut</a> -->
         <div class="dropdown dropdown-end">
             <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
