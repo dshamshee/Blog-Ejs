@@ -70,6 +70,51 @@ router.get('/delete/:id',async function(req, res){
     await postModel.deleteOne({_id: req.params.id});
     console.log("Post deleted successfully!");
     res.redirect('/user/profile');
-})
+});
+
+
+router.get('/comments/:id', isLoggedin, async function (req, res) {
+    try {
+        const postId = req.params.id;
+        const post = await postModel.findById(postId).select('comments').populate('comments.userId', 'username');
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+        // res.json(post.comments);
+        res.render('components/index')
+    } catch (error) {
+        console.error('Error fetching comments:', error);
+        res.status(500).json({ message: 'Failed to fetch comments' });
+    }
+});
+
+
+
+
+router.post('/comment/:id', isLoggedin, async function (req, res) {
+    try {
+        const postId = req.params.id;
+        const { text } = req.body;
+
+        // Find the post and push a new comment
+        const post = await postModel.findById(postId);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        post.comments.push({
+            userId: req.user._id,
+            username: req.user.username,
+            text,
+        });
+
+        await post.save();
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error adding comment:', error);
+        res.status(500).json({ message: 'Failed to add comment' });
+    }
+});
+
 
 module.exports = router;

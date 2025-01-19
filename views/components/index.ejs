@@ -36,12 +36,49 @@
                             </a>
 
                             <!-- Comment Button -->
-                                    <a href="#"><i class='bx bxs-comment-detail text-lg'></i></a>
+                            <!-- <a href="#"><i class='bx bxs-comment-detail text-lg'></i></a> -->
+                            <!-- Comment Button -->
+                            <a href="#" onclick="openCommentsModal('<%= post._id %>')">
+                                <i class="bx bxs-comment-detail text-lg"></i>
+                            </a>
+
+                            <!-- Comments Modal -->
+                            <div id="commentsModal_<%= post._id %>" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+                                <div class="bg-base-100 rounded-lg w-full max-w-lg p-5">
+                                    <!-- Modal Header -->
+                                    <div class="flex justify-between items-center border-b pb-3">
+                                        <h3 class="text-xl font-bold">Comments</h3>
+                                        <button onclick="closeCommentsModal('<%= post._id %>')" class="text-gray-600 hover:text-gray-800">✖</button>
+                                    </div>
+                            
+                                    <!-- Comments List -->
+                                    <div id="commentsList_<%= post._id %>" class="my-5 max-h-64 overflow-y-auto">
+                                        <!-- Comments will be rendered here -->
+                                        <!-- <p class="text-gray-500">Loading comments...</p> -->
+                                        <% post.comments.forEach(function(comment){ %>
+                                        <div class="mb-3 border-b pb-2">
+                                                <p class="text-gray-700"><%= comment.username %></p>
+                                                <p class="font-semibold"><%= comment.text %></p>
+                                            </div>
+                                            <% }) %>
+                                    </div>
+                            
+                                    <!-- Add New Comment -->
+                                    <form id="addCommentForm_<%= post._id %>" class="mt-3" action="/post/comment/<%= post._id %>" method="post">
+                                        <textarea id="newComment_<%= post._id %>" name="text" class="input input-bordered w-full mb-5 resize-none" placeholder="Write a comment..." required></textarea>
+                                        <button type="submit" class="mt-1 btn btn-sm">Add Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            
+
+
 
 
                             <!-- Viwe Button -->
                             <!-- <a href="/post/view/<%= post._id %>"><button class="btn btn-primary btn-xs w-20 font-bold">View</button></a> -->
-                            <a href="/post/view/<%= post._id %>"><i class='bx bx-show-alt' ></i></a>
+                            <a href="/post/view/<%= post._id %>"><i class='bx bx-show-alt'></i></a>
 
                             <!-- Delete Button -->
                             <!-- <a href="#"><i class='bx bxs-box' ></i></a> -->
@@ -53,3 +90,21 @@
 
         </div>
     </div>
+
+
+<script>
+function openCommentsModal(postId) {
+    const modal = document.getElementById(`commentsModal_${postId}`);
+    const commentsList = document.getElementById(`commentsList_${postId}`);
+
+    // Show modal
+    modal.classList.remove('hidden');
+}
+
+function closeCommentsModal(postId) {
+    const modal = document.getElementById(`commentsModal_${postId}`);
+    modal.classList.add('hidden');
+}
+
+
+</script>

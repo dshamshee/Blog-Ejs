@@ -1,11 +1,11 @@
 <% layout('./boilerplate') -%>
 
 <div class="text-white w-full  h-auto flex justify-center py-10 mt-10">
-    <div class="content w-10/12">
+    <div class="content md:w-10/12">
     <div class="overflow-x-auto">
         <table class="table">
           <!-- head -->
-          <thead>
+          <thead class="sm:hidden md:">
             <tr>
               <th>Name</th>
               <th>Discription</th>
@@ -33,7 +33,7 @@
                     <td>
                       <!-- Zemlak, Daniel and Leannon
                       <br /> -->
-                      <span class="badge badge-ghost badge-sm"><%= user.bio %></span>
+                      <span class="badge badge-ghost badge-sm md:block hidden"><%= user.bio %></span>
                     </td>
                     
                     <th>
