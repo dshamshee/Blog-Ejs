@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const userModel = require('../models/User');
@@ -30,7 +31,7 @@ router.post('/register',upload.single('profile_picture'), async function (req, r
                     password: hash,
                     profile_picture: req.file.filename
                 })
-                const token = jwt.sign({ email: createdUser.email, name: createdUser.name, id: createdUser._id }, "SecretString");
+                const token = jwt.sign({ email: createdUser.email, name: createdUser.name, id: createdUser._id }, process.env.JWT_SECRET_KEY );
                 res.cookie("token", token);
                 res.redirect('/');
             })
@@ -55,7 +56,7 @@ router.post('/login',async function (req, res) {
     try {
         bcrypt.compare(password, user.password, function (err, result) {
             if(result){
-                const token = jwt.sign({ email: user.email, name: user.name, id: user._id }, "SecretString");
+                const token = jwt.sign({ email: user.email, name: user.name, id: user._id }, process.env.JWT_SECRET_KEY);
                 res.cookie("token", token);
                 res.redirect('/');
             } else{
