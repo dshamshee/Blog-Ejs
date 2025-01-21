@@ -24,7 +24,7 @@
                 <% if(user.bio==="Bio not set" ){ %>
                     <form class="w-full flex justify-center gap-5" action="/user/bio" method="post">
                         <input type="text" name="bio" placeholder="Write your bio..."
-                            class="input input-sm bg-transparent input-bordered input-accent w-full max-w-xs" />
+                            class="input input-sm bg-transparent input-bordered w-full max-w-xs" />
                         <input type="submit" value="Save" class="btn btn-accent btn-sm">
                     </form>
                     <% }else{ %>
@@ -81,22 +81,22 @@
                                     <a class="" href="/post/profile/like/<%= post._id%>">
                                         <% if(post.likes.indexOf(user._id)===-1){ %>
                                             <%= post.likes.length%> <i id="likeIcon_<%= post._id %>"
-                                                    class="bx bx-like text-lg"></i>
+                                                    class="bx bx-like text-lg hover:text-pink-500"></i>
                                                 <% }else{ %>
                                                     <%= post.likes.length%> <i id="likeIcon_<%= post._id %>"
-                                                            class="bx bxs-like text-lg"></i>
+                                                            class="bx bxs-like text-lg text-pink-500"></i>
                                                         <% } %>
                                     </a>
 
                                     <!-- Comment Button -->
-                                    <a href="#"><i class='bx bxs-comment-detail text-lg'></i></a>
+                                    <!-- <a href="#"><i class='bx bxs-comment-detail text-lg'></i></a> -->
 
                                     <!-- View Button -->
                                     <!-- <button class="btn btn-primary btn-xs w-20 font-bold">View</button> -->
-                                    <a href="/post/view/<%= post._id %>"><i class='bx bx-show-alt'></i></a>
+                                    <a class="hover:text-green-500" href="/post/view/<%= post._id %>"><i class='bx bx-show-alt'></i></a>
 
                                     <!-- Delete Button -->
-                                    <a href="/post/delete/<%= post._id %>"><i class='bx bxs-box'></i></a>
+                                    <a class="hover:text-red-500" href="/post/delete/<%= post._id %>"><i class='bx bxs-box'></i></a>
                                 </div>
                             </div>
                         </div>
