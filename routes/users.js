@@ -15,6 +15,7 @@ router.get('/register', function (req, res) {
 // Register a new User
 router.post('/register',upload.single('profile_picture'), async function (req, res) {
     const { name, email, username, password } = req.body;
+    console.log(req.file.buffer);
     let user = await userModel.findOne({ email: email });
     if (user) {
         console.log("Email already exists enter differenct email and try again");
@@ -29,7 +30,7 @@ router.post('/register',upload.single('profile_picture'), async function (req, r
                     username,
                     email,
                     password: hash,
-                    profile_picture: req.file.filename
+                    profile_picture: req.file.buffer
                 })
                 const token = jwt.sign({ email: createdUser.email, name: createdUser.name, id: createdUser._id }, process.env.JWT_SECRET_KEY );
                 res.cookie("token", token);
@@ -91,7 +92,7 @@ router.post('/bio', isLoggedin, async function(req, res){
 
 
 router.post('/uploadProfilePicture', isLoggedin, upload.single('profile_picture'), async function(req, res){
-    req.user.profile_picture = req.file.filename;
+    req.user.profile_picture = req.file.buffer;
     await req.user.save();
     res.redirect('/user/profile');
 })

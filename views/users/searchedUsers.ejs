@@ -21,7 +21,7 @@
                         <div class="avatar">
                           <div class="mask mask-squircle h-12 w-12">
                             <img
-                              src="/images/uploads/<%= user.profile_picture %>" />
+                              src="data:image/jpeg;base64,<%= user.profile_picture.toString('base64') %>" />
                           </div>
                         </div>
                         <div>

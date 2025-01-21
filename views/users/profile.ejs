@@ -6,7 +6,7 @@
         <div class=" flex flex-col items-center bg-zinc-900 rounded-lg shadow-lg p-8">
             <!-- Profile Picture -->
             <img class="w-32 h-32 rounded-full object-cover border-4 border-blue-600"
-                src="/images/uploads/<%= user.profile_picture %>" alt="Profile Picture">
+                src="data:image/jpeg;base64,<%= user.profile_picture.toString('base64') %>" alt="Profile Picture">
             <!-- Edit Icon and Hidden File Upload -->
             <form action="/user/uploadProfilePicture" method="POST" enctype="multipart/form-data" id="uploadForm">
                 <input type="file" name="profile_picture" id="fileInput" class="hidden" onchange="submitForm()">
@@ -63,7 +63,7 @@
                     <div class="">
                         <div class="card card-side bg-base-100 md:w-[420px] md:h-48 h-48 shadow-xl">
                             <figure>
-                                <img class="h-48 md:w-40 w-32" src="/images/blogUploads/<%= post.image %>"
+                                <img class="h-48 md:w-40 w-32" src="data:image/jpeg;base64,<%= post.image.toString('base64') %>"
                                     alt="Post Image" />
                             </figure>
                             <div class="card-body">
