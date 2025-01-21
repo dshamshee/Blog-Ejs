@@ -2724,6 +2724,22 @@ html {
   width: 100vw;
 }
 
+.w-\[\] {
+  width: ;
+}
+
+.w-\[88\] {
+  width: 88;
+}
+
+.w-\[88\%\] {
+  width: 88%;
+}
+
+.w-\[85\%\] {
+  width: 85%;
+}
+
 .max-w-lg {
   max-width: 32rem;
 }
@@ -3164,6 +3180,10 @@ html {
 
   .md\:w-\[70\%\] {
     width: 70%;
+  }
+
+  .md\:w-full {
+    width: 100%;
   }
 
   .md\:grid-cols-2 {
