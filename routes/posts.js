@@ -18,11 +18,15 @@ router.get('/create/:userid',isLoggedin, async function(req, res){
 router.post('/create',blogUploads.single('image'), isLoggedin, async function(req, res){
     const user = req.user;
     const {title, caption, body} = req.body;
+    let image = 'default.jpg';
+    if(req.file){
+        image = req.file.filename;
+    }
     const post = await postModel.create({
         title,
         caption,
         body,
-        image: req.file.filename,
+        image,
         author: user._id,
         username: user.username
     });
