@@ -21,7 +21,7 @@
             <p class="text-gray-500 text-lg">@<%= user.username %>
             </p>
             <p id="bio" class="mt-2 text-gray-600 text-center">
-                <% if(user.bio==="Nothing" ){ %>
+                <% if(user.bio==="Bio not set" ){ %>
                     <form class="w-full flex justify-center gap-5" action="/user/bio" method="post">
                         <input type="text" name="bio" placeholder="Write your bio..."
                             class="input input-sm bg-transparent input-bordered input-accent w-full max-w-xs" />

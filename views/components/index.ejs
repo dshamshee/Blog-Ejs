@@ -25,13 +25,13 @@
                         <div class="card-actions justify-around">
 
                             <!-- Like Button -->
-                            <a href="/post/like/<%= post._id%>" class="text-gray-400 hover:text-pink-500">
+                            <a href="/post/like/<%= post._id%>" class="text-gray-400">
                                 <% if(post.likes.indexOf(user._id)===-1){ %>
-                                    <%= post.likes.length%> <i id="likeIcon_<%= post._id %>"
-                                            class="bx bx-like text-lg "></i>
+                                    <%= post.likes.length%> <span class="hover:text-pink-500"><i id="likeIcon_<%= post._id %>"
+                                            class="bx bx-like text-lg "></i></span>
                                         <% }else{ %>
-                                            <%= post.likes.length%> <i id="likeIcon_<%= post._id %>"
-                                                    class="bx bxs-like text-lg "></i>
+                                            <%= post.likes.length%> <span class="text-pink-500"><i id="likeIcon_<%= post._id %>"
+                                                    class="bx bxs-like text-lg"></i></span>
                                                 <% } %>
                             </a>
 
